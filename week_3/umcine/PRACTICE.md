@@ -10,3 +10,5 @@
 - 배운 점: path param은 문자열이라 `String(movie.id)`로 변환해서 전달
 - 코드 변경 보기: [커밋 c936881](https://github.com/0514swkim-web/UMC_study/commit/c936881)
 - 결과 화면: ![카드 링크 결과](./docs/card-link.png)
+
+- 확인 결과: 카드 클릭 시 URL과 상세 정보 변경, 새로고침 후에도 같은 영화 유지, 없는 ID(`/movies/999`)는 안내 문구 표시
