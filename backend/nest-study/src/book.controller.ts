@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { BookService } from './book.service';
 
 @Controller('books')
@@ -10,7 +10,14 @@ export class BookController {
     return await this.bookService.getAllBooks();
   }
 
-  // 추가: POST /books
+  // 미션 1: GET /books/category/1
+  @Get('category/:categoryId')
+  async getBooksByCategory(
+    @Param('categoryId') categoryId: string,
+  ): Promise<any> {
+    return await this.bookService.getBooksByCategory(categoryId);
+  }
+
   @Post()
   async createBook(@Body() body: Record<string, any>): Promise<string> {
     return await this.bookService.createBook(body);

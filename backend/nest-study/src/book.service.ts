@@ -9,7 +9,11 @@ export class BookService {
     return await this.bookRepository.findAll();
   }
 
-  // 추가
+  // 미션 1
+  async getBooksByCategory(categoryId: string): Promise<any> {
+    return await this.bookRepository.findByCategory(categoryId);
+  }
+
   async createBook(body: Record<string, any>): Promise<string> {
     await this.bookRepository.create(body);
     return '도서 등록이 완료되었습니다!';

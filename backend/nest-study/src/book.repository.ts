@@ -12,7 +12,13 @@ export class BookRepository {
     return rows;
   }
 
-  // 추가: INSERT
+  // 미션 1: 카테고리별 조회
+  async findByCategory(categoryId: string): Promise<any> {
+    const sql = 'SELECT * FROM book WHERE category_id = ?';
+    const [rows] = await this.pool.execute(sql, [categoryId]);
+    return rows;
+  }
+
   async create(body: Record<string, any>): Promise<any> {
     const sql =
       'INSERT INTO book (category_id, title, description, is_available) VALUES (?, ?, ?, true)';
