@@ -6,6 +6,9 @@ import { AppService } from './app.service';
 import { BookController } from './book.controller';
 import { BookService } from './book.service';
 import { BookRepository } from './book.repository';
+import { RentalController } from './rental.controller';
+import { RentalService } from './rental.service';
+import { RentalRepository } from './rental.repository';
 
 @Module({
   imports: [
@@ -13,8 +16,15 @@ import { BookRepository } from './book.repository';
       isGlobal: true,
     }),
   ],
-  controllers: [AppController, BookController],
-  providers: [...databaseProviders, AppService, BookService, BookRepository],
+  controllers: [AppController, BookController, RentalController],
+  providers: [
+    ...databaseProviders,
+    AppService,
+    BookService,
+    BookRepository,
+    RentalService,
+    RentalRepository,
+  ],
   exports: [...databaseProviders],
 })
 export class AppModule {}
