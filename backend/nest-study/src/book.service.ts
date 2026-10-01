@@ -8,4 +8,10 @@ export class BookService {
   async getAllBooks(): Promise<any> {
     return await this.bookRepository.findAll();
   }
+
+  // 추가
+  async createBook(body: Record<string, any>): Promise<string> {
+    await this.bookRepository.create(body);
+    return '도서 등록이 완료되었습니다!';
+  }
 }

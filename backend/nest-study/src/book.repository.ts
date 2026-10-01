@@ -11,4 +11,16 @@ export class BookRepository {
     const [rows] = await this.pool.query(sql);
     return rows;
   }
+
+  // 추가: INSERT
+  async create(body: Record<string, any>): Promise<any> {
+    const sql =
+      'INSERT INTO book (category_id, title, description, is_available) VALUES (?, ?, ?, true)';
+    const [result] = await this.pool.execute(sql, [
+      body.categoryId,
+      body.title,
+      body.description,
+    ]);
+    return result;
+  }
 }
