@@ -40,10 +40,17 @@ UMC 웹 스터디 워크북 실습 저장소. 매주 워크북을 섹션 순서�
 - `/troubleshooting` : 트러블슈팅 기록 (UMC 양식)
 - `/mission-record` : 미션 마무리 점검 + 노션 제출용 기록
 
-## 현재 진행: 4_1 (Web Storage + Zustand)
-- 목표: 북마크를 Zustand로 목록/검색/상세에서 공유 + `persist`로 localStorage 유지
+## 현재 진행: 4_2 (ORM으로 첫 API 완성하기, 백엔드)
+- 대상: `backend/nest-study` (NestJS + TypeORM + MySQL, **npm** 사용)
+  - 타입 체크: `npx tsc -p tsconfig.build.json --noEmit` / 서버: `npm run start:dev`
+  - 기존 테이블 사용 → `synchronize: false` 유지, bigint PK는 `bigNumberStrings: false`로 number 처리
+  - 3주차 Raw SQL 버전은 태그 `w3-2-mission-rentals`에 보존 (rental API는 Raw SQL 유지)
+- 목표: 3주차 Raw SQL 도서 API를 TypeORM 엔티티·Repository·DTO 구조로 리팩터링
 - 미니 실습 계획
-  - [3] useState + localStorage로 북마크 유지 (`src/utils/bookmark-storage.ts`) → `week4-practice-bookmark-localstorage`
-  - [4.2] Zustand store + `BookmarkButton` → `week4-practice-zustand-store`
-  - [5.1] `persist` 적용 (key `umcine-bookmark-store`) → `week4-practice-zustand-persist`
-- 필수 미션: 3화면 북마크 공유, 새로고침·브라우저 재실행 유지, 저장값 삭제 시 빈 상태 복구, `pnpm build`
+  - [5] 실습 1: `Book`/`Category` 엔티티 + TypeORM 연결 + `GET /books` 최신순 응답 DTO → `week4-2-practice-get-books`
+  - [6] 실습 2: `CreateBookDto` 검증 + `POST /books` 201 + 없는 카테고리 404 → `week4-2-practice-post-books`
+  - 기록 위치: `backend/nest-study/PRACTICE.md`, 스크린샷 `backend/nest-study/docs/` (형식은 `/practice-record`와 동일)
+- 필수 미션: 다대일 엔티티, GET 최신순(bookId·title·description·categoryName·isAvailable), POST 201, DTO 검증 + 없는 카테고리 예외 → `week4-2-mission`
+  - 미션 커밋: 3주차 카테고리별 조회(`GET /books/category/:categoryId`)도 TypeORM으로 이전
+  - 제출물: 핵심 코드(Entity·DTO·Repository·Service·Controller), Postman 캡처(GET 성공·POST 201·오류), Raw SQL 대비 바뀐 점 3문장+, 검증 한 문장
+- 선택 심화(나중에): 키워드 검색 `GET /books?keyword=` / title UNIQUE + 409
