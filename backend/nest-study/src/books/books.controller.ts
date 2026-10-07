@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { BookResponseDto } from './dto/book-response.dto';
@@ -10,6 +17,13 @@ export class BooksController {
   @Get()
   getBooks(): Promise<BookResponseDto[]> {
     return this.booksService.getBooks();
+  }
+
+  @Get('category/:categoryId')
+  getBooksByCategory(
+    @Param('categoryId', ParseIntPipe) categoryId: number,
+  ): Promise<BookResponseDto[]> {
+    return this.booksService.getBooksByCategory(categoryId);
   }
 
   // POST는 Nest 기본 응답 코드가 201 Created

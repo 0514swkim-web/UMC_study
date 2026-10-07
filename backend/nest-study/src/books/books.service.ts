@@ -23,6 +23,16 @@ export class BooksService {
     return books.map((book) => BookResponseDto.from(book));
   }
 
+  // 3주차 미션: 카테고리별 조회
+  async getBooksByCategory(categoryId: number): Promise<BookResponseDto[]> {
+    const books = await this.bookRepository.find({
+      where: { category: { categoryId } },
+      relations: { category: true },
+      order: { bookId: 'DESC' },
+    });
+    return books.map((book) => BookResponseDto.from(book));
+  }
+
   async createBook(dto: CreateBookDto): Promise<BookResponseDto> {
     const category = await this.categoryRepository.findOneBy({
       categoryId: dto.categoryId,
