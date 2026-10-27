@@ -5,6 +5,8 @@ import { Member } from './entity/member.entity.js';
 import { Rating } from './entity/rating.entity.js';
 import { MemberController } from './controller/member.controller.js';
 import { MemberService } from './service/member.service.js';
+import { RatingController } from './controller/rating.controller.js';
+import { RatingService } from './service/rating.service.js';
 
 @Module({
   imports: [
@@ -27,7 +29,7 @@ import { MemberService } from './service/member.service.js';
     // 레이어 구조라 도메인 모듈 없이 app.module 한 곳에서 Repository 등록
     TypeOrmModule.forFeature([Member, Rating]),
   ],
-  controllers: [MemberController],
-  providers: [MemberService],
+  controllers: [MemberController, RatingController],
+  providers: [MemberService, RatingService],
 })
 export class AppModule {}
